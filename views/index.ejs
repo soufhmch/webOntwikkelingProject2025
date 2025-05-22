@@ -1,0 +1,61 @@
+<%- include('partials/navbar') %>
+
+    <body class="bg-black text-white">
+
+        <!-- Hero -->
+        <section class="relative bg-cover bg-center h-screen" style="background-image: url('/images/sh-watch.png');">
+            <div class="bg-black bg-opacity-70 w-full h-full flex items-center justify-center text-center px-6">
+                <div>
+                    <h1 class="text-5xl font-bold mb-4">Ontdek de Luxe van Tempus Horlogerie</h1>
+                    <p class="text-lg max-w-2xl mx-auto">Een exclusieve collectie horloges voor de moderne man.</p>
+                    <a href="#collectie"
+                        class="mt-6 inline-block bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">Bekijk
+                        Collectie</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Over Mij -->
+        <section class="py-20 px-6 bg-gray-900">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4">Mijn Passie voor Tijd</h2>
+                <p class="text-gray-300 text-lg">
+                    Sinds mijn jeugd ben ik gefascineerd door het vakmanschap en de precisie van horloges. Wat begon als
+                    een verzameling groeide uit tot Tempus Horlogerie - een merk dat staat voor stijl, kwaliteit en
+                    tijdloos design.
+                </p>
+            </div>
+        </section>
+
+        <!-- Collectie -->
+        <section id="collectie" class="py-20 px-6">
+            <div class="max-w-6xl mx-auto">
+                <a href="/collection">
+                    <h2 class="text-3xl font-bold mb-8 text-center">Onze Collectie</h2>
+                </a>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <% watches.forEach(watch=> { %>
+                        <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                            <img src="<%= watch.imageUrl %>" alt="<%= watch.name %>" class="w-full h-64 object-cover">
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold">
+                                    <%= watch.name %>
+                                </h3>
+                                <p class="text-gray-400">
+                                    <%= watch.brand %>
+                                </p>
+                                <p class="text-gray-400 text-sm mt-2">
+                                    <%= watch.description %>
+                                </p>
+                                <div class="mt-4">
+                                    <span class="text-white font-bold">€<%= watch.price %></span>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>

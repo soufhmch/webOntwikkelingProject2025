@@ -1,0 +1,97 @@
+<%- include('partials/navbar') %>
+
+    <body class="bg-black text-white">
+        <!-- Hero Sectie -->
+        <section class="relative bg-cover bg-center h-64" style="background-image: url('/images/sh-watch.png');">
+            <div class="bg-black bg-opacity-70 w-full h-full flex items-center justify-center text-center px-6">
+                <div>
+                    <h1 class="text-4xl font-bold mb-4">
+                        <%= watch.name %>
+                    </h1>
+                    <p class="text-lg max-w-2xl mx-auto">
+                        <%= watch.manufacturer.name %>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detail Content -->
+        <section class="py-16 px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-12">
+                    <!-- Afbeelding -->
+                    <div class="w-full md:w-1/2">
+                        <img src="<%= watch.imageUrl %>" alt="<%= watch.name %>"
+                            class="w-full h-auto max-h-96 object-contain rounded-lg">
+                    </div>
+
+                    <!-- Details -->
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <!-- Merk en prijs -->
+                        <div class="flex items-center justify-between">
+                            <a href="/brands">
+                                <div class="flex items-center">
+                                    <img src="<%= watch.manufacturer.logoUrl %>" alt="<%= watch.manufacturer.name %>"
+                                        class="w-12 h-12 rounded-full mr-4">
+                                    <h2 class="text-2xl font-bold">
+                                        <%= watch.manufacturer.name %>
+                                    </h2>
+                                </div>
+                            </a>
+                            <span class="text-3xl font-bold">€<%= watch.price.toLocaleString('nl-NL') %></span>
+                        </div>
+
+                        <!-- Type en waterdicht -->
+                        <div class="flex items-center gap-4">
+                            <span class="px-4 py-2 rounded-full 
+                            <%= watch.watchType === 'luxury' ? 'bg-purple-900 text-purple-300' : 
+                               watch.watchType === 'diving' ? 'bg-blue-900 text-blue-300' :
+                               watch.watchType === 'chronograph' ? 'bg-red-900 text-red-300' :
+                               'bg-gray-700 text-gray-300' %>">
+                                <%= watch.watchType %>
+                            </span>
+                            <span class="flex items-center gap-2">
+                                <%= watch.isWaterResistant ? '✅ Waterdicht' : '❌ Niet waterdicht' %>
+                            </span>
+                            <span class="text-gray-400">
+                                Uitgebracht: <%= new Date(watch.releaseDate).getFullYear() %>
+                            </span>
+                        </div>
+
+                        <!-- Beschrijving -->
+                        <div class="py-4 border-t border-b border-gray-800">
+                            <h3 class="text-xl font-semibold mb-2">Beschrijving</h3>
+                            <p class="text-gray-300">
+                                <%= watch.description %>
+                            </p>
+                        </div>
+
+                        <!-- Kenmerken -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Kenmerken</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <% watch.features.forEach(feature=> { %>
+                                    <div class="flex items-center">
+                                        <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                                        <span>
+                                            <%= feature %>
+                                        </span>
+                                    </div>
+                                    <% }); %>
+                            </div>
+                        </div>
+
+                        <!-- Actieknoppen -->
+                        <div class="flex gap-4 pt-6">
+                            <a href="/collection"
+                                class="px-6 py-3 border border-gray-600 rounded-full hover:bg-gray-800 transition">
+                                Terug naar collectie
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+    </body>

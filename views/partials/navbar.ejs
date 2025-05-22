@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH Horlogecollectie</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="/js/script.js" defer></script>
+</head>
+<nav class="bg-gray-900 text-white px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <!-- Logo / Merk -->
+        <div class="text-2xl font-bold">
+            <a href="/">Tempus Horlogerie</a>
+        </div>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex space-x-6">
+            <a href="/collection" class="hover:text-gray-300">Collectie</a>
+            <a href="/brands" class="hover:text-gray-300">Merken</a>
+            <% if (typeof currentUser !=='undefined' && currentUser) { %>
+                <% } %>
+        </div>
+
+        <!-- Auth links -->
+        <div class="hidden md:flex items-center space-x-4">
+            <% if (currentUser?.loggedIn) { %>
+                <% if (currentUser.role==='ADMIN' ) { %>
+                    <a href="/dashboard" class="hover:text-gray-300">Admin Dashboard</a>
+                    <% } %>
+                        <!-- Gebruikersnaam tonen -->
+                        <span class="font-medium">
+                            Welkom, <%= currentUser.name %>!
+                        </span>
+                        <a href="/logout" class="hover:text-gray-300">Uitloggen</a>
+                        <% } else { %>
+                            <a href="/login" class="hover:text-gray-300">Inloggen</a>
+                            <a href="/login?showRegister=true"
+                                class="bg-white text-black px-4 py-2 rounded hover:bg-gray-300 font-medium">
+                                Registreer
+                            </a>
+                            <% } %>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <div class="md:hidden">
+            <button id="mobile-menu-btn" class="focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-6 pt-4 pb-2 space-y-2">
+        <a href="/collectie" class="block hover:text-gray-300">Collectie</a>
+        <a href="/merken" class="block hover:text-gray-300">Merken</a>
+        <% if (typeof currentUser !=='undefined' && currentUser) { %>
+            <a href="/account" class="block hover:text-gray-300">Account</a>
+            <a href="/logout" class="block hover:text-gray-300">Uitloggen</a>
+            <% } else { %>
+                <a href="/login" class="block hover:text-gray-300">Inloggen</a>
+                <a href="/login?showRegister=true"
+                    class="bg-white text-black px-4 py-2 rounded hover:bg-gray-300 font-medium">
+                    Registreer
+                </a>
+                <% } %>
+    </div>
+</nav>
